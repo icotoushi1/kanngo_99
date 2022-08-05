@@ -26,17 +26,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdRequest.Gender;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import java.io.IOException;
 
-import at_sys.pk.kanngo_kokushi.R;
-
 public class Kanngo_kokushiActivity extends Activity {
+
+	//test
 	public int kai;
+	public int kai2;
 	public int am_pm; 
 	private DataBaseHelper mDbHelper;  
 	//private disp disp ;
@@ -64,7 +60,7 @@ public class Kanngo_kokushiActivity extends Activity {
     int editTextWidth=0;
     int editTextHeight=0;
     int buttonWidth=0;
-	int buttonHeight=0;//�f�B�X�v���C�̉�������Ƀ{�^���̍������擾����
+	int buttonHeight=0;//ディスプレイの横幅を基準にボタンの高さを取得する
 	int padding=0;
     */
    // int textSize=0;
@@ -72,58 +68,25 @@ public class Kanngo_kokushiActivity extends Activity {
     //int maxStr=23;
     
     
-    
-    
-    
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.main);
-        
-        
-        WindowManager windowmanager = (WindowManager)getSystemService(WINDOW_SERVICE);
+        WindowManager windowmanager
+				= (WindowManager)getSystemService(WINDOW_SERVICE);
         //disp = new disp(windowmanager,savedInstanceState);
         setDispData();
         resizeMain();
         setDatabase();
-        setAdmobs();
+        //setAdmobs();
         
     }
-    
-	public void setAdmob(int r_id_viewName){
-   	 
-    	AdView adView;
-    	
-    	AdSize adSize;
-    	
-    	if(dispWidth>750 && dispHeight>750 &&dispDensity<=1.5 ){
-    		adSize = AdSize.IAB_LEADERBOARD;
-		}else if(dispWidth>500 && dispHeight>500 &&dispDensity<=1.5 )
-		{
-			adSize = AdSize.IAB_BANNER;
-		}else{
-			adSize = AdSize.BANNER;
-		}
-    	
-    	
-    	adView = new AdView(this, adSize, "a15083735eedda1");
-    	 
-    	AdRequest adRequest = new AdRequest();
-    	adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-    	adRequest.setGender(Gender.FEMALE);
-    	LinearLayout layout = (LinearLayout)findViewById(r_id_viewName);
+
 	
-    	// Add the adView to it
-    	layout.addView(adView);
-    	// Start loading the ad in the background.
-    	adView.loadAd(adRequest);
-    }
-	
-	 public void setAdmobs(){
-	        setAdmob(R.id.linearAdmobTop);
-	        setAdmob(R.id.linearAdmobBottm);
+	public void setAdmobs(){
+//	        setAdmob(R.id.linearAdmobTop);
+//	        setAdmob(R.id.linearAdmobBottm);
 	 } 
      
     public void onClickKako101_1(View view){
@@ -178,11 +141,10 @@ public class Kanngo_kokushiActivity extends Activity {
 	    String ansMsg="";
 	     
 	     if(kekkaHyouFrg == false){
-	     //�񓚕\�쐬
+	     //回答表作成
 	    	kekkaHyouFrg=true;
 	     	//createKekkaHyou();
 	     }
-	     
 	     if( cb1.isChecked()){
 	     	checkNum = checkNum + 1;
 	     	if(ans1 == 1 || ans2 ==1){
@@ -219,16 +181,16 @@ public class Kanngo_kokushiActivity extends Activity {
 	     }
 	     
 	     if (correctNum >= 1 && correctNum == ansNum && checkNum==ansNum) {
-	       ansMsg= "���@�����ł��B��";
+	       ansMsg= "☆　正解です。☆";
 	       
 	       seigo=1;
 	     }
 	     else if (checkNum!=ansNum ){
-	       ansMsg = "�~�@"+ ansNum +"�I�����Ă��������B�~";
+	       ansMsg = "×　"+ ansNum +"つ選択してください。×";
 	       seigo=2;
 	     }
 	     else{
-	       ansMsg  = "�~�@�s�����ł��B�~";
+	       ansMsg  = "×　不正解です。×";
 	       seigo=3;
 	     }
 	     inputKekka(seigo,ansMsg); 
@@ -240,11 +202,12 @@ public class Kanngo_kokushiActivity extends Activity {
     		TextView textAns = (TextView)findViewById(R.id.textAns);
     		
     		String str="";
+
+
+    		str ="正解　"+ans2;
+    		if(ansNum==2) str =str+"　と　"+ans1;
     		
-    		str ="�����@"+ans2;
-    		if(ansNum==2) str =str+"�@�Ɓ@"+ans1;
-    		
-    		textAns.setText(str + "�@");
+    		textAns.setText(str + "　");
     	}
     }
     public void inputKekka(int seigo ,String ansMsg){
@@ -259,20 +222,20 @@ public class Kanngo_kokushiActivity extends Activity {
     		ansTextColor=Color.YELLOW; //"goldenrod";
   	        ansColor=R.color.green;//"khaki"
   	        kekkaAns[qNum]=true;
-  	        maruBatu="��";
+  	        maruBatu="○";
   	        kekkaCnt[qNum]=true;
   	      
     	}else if(seigo==2){
     		ansTextColor=Color.RED;
  	        ansColor=R.color.pink;
- 	        maruBatu="�~";
+ 	        maruBatu="×";
  	       kekkaAns[qNum]=false;
 	       kekkaCnt[qNum]=true;
  	       
     	}else{
     		ansTextColor=Color.RED;
     		ansColor=R.color.pink;
-    		maruBatu="�~";
+    		maruBatu="×";
  	      kekkaAns[qNum]=false;
 	      kekkaCnt[qNum]=true;
 	    
@@ -302,7 +265,8 @@ public class Kanngo_kokushiActivity extends Activity {
 		 }
 		 TextView textSeikaiRitu = (TextView)findViewById(R.id.textSeikaiRitu);
 		 textSeikaiRitu.setVisibility(View.VISIBLE);
-		 textSeikaiRitu.setText((int)kaitouCnt+"�⒆" + (int)seikaiCnt + "�␳���F���� " + dispRitu +"��");
+		 textSeikaiRitu.setText((int)kaitouCnt+"問中" +
+				 (int)seikaiCnt + "問正解：正解率 " + dispRitu +"％");
     }
     public void preProces(){
     	cratKekkaHyou();
@@ -315,14 +279,14 @@ public class Kanngo_kokushiActivity extends Activity {
     	int kekkaId=0;
     	
     	for (int j=0;j<24;j++) {
-            //�s�̐���
+            //行の生成
             TableRow row=new TableRow(this);
             row.setLayoutParams(new TableLayout.LayoutParams(WC,WC));
-            row.setGravity(Gravity.CENTER);//������
+            row.setGravity(Gravity.CENTER);//中央寄せ
             //row.setBackgroundColor (Color.WHITE);
             tableKekkaHyou.addView(row);
             
-            //�v�f�̒ǉ�
+            //要素の追加
             for (int i=0;i<5;i++) {
             	TextView textKekka =new TextView(this);
             	textKekka.setGravity(Gravity.CENTER);
@@ -341,7 +305,7 @@ public class Kanngo_kokushiActivity extends Activity {
     	int id = cursor.getInt(1);
     	TextView textKekka =(TextView)findViewById(id);
     	textKekka.setVisibility(View.VISIBLE);
-    	textKekka.setBackgroundResource(R.drawable.border);
+    	//textKekka.setBackgroundResource(R.drawable.border);
     	textKekka.setText(id+":"+inMaruBatu);
     		
     	inputSeikaiRitu();
@@ -362,9 +326,9 @@ public class Kanngo_kokushiActivity extends Activity {
     	
     	/*
     	 if(ans1==0){
-	       	document.getElementById("text_msg").innerHTML="�����́F"+ans2+"�@�ł�";
+	       	document.getElementById("text_msg").innerHTML="答えは："+ans2+"�@�ł�";
 	       }else{
-	       	document.getElementById("text_msg").innerHTML="�����́F"+ans2+"    "+ans1+"�@�ł�";
+	       	document.getElementById("text_msg").innerHTML="答えは："+ans2+"    "+ans1+"�@�ł�";
 	       }
 	       kekka_ans[td_num] = false;
 	       kekka_cnt[td_num] = true;
@@ -392,7 +356,7 @@ public class Kanngo_kokushiActivity extends Activity {
     	int byou = time % 60;
     	TextView textKeikaJikan = (TextView)findViewById(R.id.textKeikaJikan);
     	textKeikaJikan.setVisibility(View.VISIBLE);
-    	textKeikaJikan.setText(hun+"��"+byou+"�b"); 
+    	textKeikaJikan.setText(hun+"分"+byou+"秒");
     	
     }
   /*  public void onClickETextQuestionNum(View view){
@@ -522,7 +486,6 @@ public class Kanngo_kokushiActivity extends Activity {
     	eTextQuestionNum.setFocusable(false);
     	
     	
-    	
     	ScrollView sv =  (ScrollView)findViewById(R.id.ScrollView);
     	
     	sv.scrollTo(0, 0);
@@ -530,8 +493,8 @@ public class Kanngo_kokushiActivity extends Activity {
     	LinearLayout linearSelectOutLine = (LinearLayout)findViewById(R.id.linearSelectOutLine);
     	
     	linearSelectOutLine.setMinimumHeight(0);
-    	linearSelectOutLine.setBackgroundResource(at_sys.pk.kanngo_kokushi.R.color.brack);
-    	linearSelectOutLine.setBackgroundResource(at_sys.pk.kanngo_kokushi.R.color.yellow);
+    	linearSelectOutLine.setBackgroundResource(R.color.brack);
+    	linearSelectOutLine.setBackgroundResource(R.color.yellow);
     	
     	eTextQuestionNum.setFocusable(true);
     	eTextQuestionNum.setFocusableInTouchMode(true);
@@ -685,8 +648,8 @@ public class Kanngo_kokushiActivity extends Activity {
     		
     		
     	}
-    	tQuestion.setText("�� "+qNum+"\n"+question);
-    	
+    	tQuestion.setText("問 "+qNum+"\n"+question);
+
     	
 //    	int iconId = getResources().getIdentifier("g100_1_17.jpg", "drawable", getPackageName());
     	
@@ -696,7 +659,9 @@ public class Kanngo_kokushiActivity extends Activity {
     	cb2.setText(cb2str);
     	cb3.setText(cb3str);
     	cb4.setText(cb4str);
-    	
+
+
+
     	
     	if(cb5str==null){
     		cb5.setVisibility(View.GONE);
@@ -735,14 +700,14 @@ public class Kanngo_kokushiActivity extends Activity {
     	}
     	
     	
-    	//�\�t�g�L�[�{�[�h���J���Ă���Ε���
+    	//ソフトキーボードが開いていれば閉じる
     	EditText eTQuestionNum = (EditText)findViewById(R.id.eTextQuestionNum);
 		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		inputMethodManager.hideSoftInputFromWindow(eTQuestionNum.getWindowToken(), 0);
 		
     }
     public void getData(int kai, int am_pm ){
-    	//�f�[�^�擾
+    	//データ取得
     	String sql 
     	= "SELECT DISTINCT kanngo._id, q_num,big_question.big_question as big_question ," +
     	  " question, gazou_path ," +  
@@ -766,7 +731,7 @@ public class Kanngo_kokushiActivity extends Activity {
     
     /*
     public void getData(String table_name ,String where){
-    	//�f�[�^�擾
+    	//データ取得
     	
     	cursor = findData(TABLE_NAME,where);
     	rowMax=cursor.getCount();
@@ -776,7 +741,7 @@ public class Kanngo_kokushiActivity extends Activity {
     	
     }
     private Cursor findData(String TABLE_NAME,String where ) { 
-        //�f�[�^���擾
+        //データを取得
         return db.query(TABLE_NAME,COLUMNS, where,null,null,null,null);  
     }*/
     
@@ -794,23 +759,23 @@ public class Kanngo_kokushiActivity extends Activity {
             throw sqle;  
         }
     } 
-    //�f�[�^�x�[�X�w���p�[�̒�`(1)
+    //データベースヘルパーの定義(1)
     private static class DBHelper extends SQLiteOpenHelper {
-        //�f�[�^�x�[�X�w���p�[�̃R���X�g���N�^(2)
+        //データベースヘルパーのコンストラクタ(2)
         public DBHelper(Context context) {
             super(context,DB_NAME,null,1);
         }
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			// TODO �����������ꂽ���\�b�h�E�X�^�u			
+			// TODO 自動生成されたメソッド・スタブ
 		}
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// TODO �����������ꂽ���\�b�h�E�X�^�u			
+			// TODO 自動生成されたメソッド・スタブ
 		}
     }
     protected void onStop() {
-		// TODO �����������ꂽ���\�b�h�E�X�^�u
+		// TODO 自動生成されたメソッド・スタブ
 		super.onStop();
 		onDestroy();
 		

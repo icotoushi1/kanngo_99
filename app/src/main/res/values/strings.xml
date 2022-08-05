@@ -1,3 +1,56 @@
 <resources>
-    <string name="app_name">kanngo_99</string>
+
+    <string name="hello">Hello World, Kanngo_kokushiActivity!</string>
+    <string name="app_name">看護師国家試験過去問</string>
+    <string name="kako101_1">第101回看護師国家試験　午前問</string>
+    <string name="kako101_2">第101回看護師国家試験　午後問</string>
+    <string name="kako100_1">第100回看護師国家試験　午前問</string>
+    <string name="kako100_2">第100回看護師国家試験　午後問</string>
+    <string name="kako99_1" >第 99回看護師国家試験　午前問</string>
+
+
+    <string name="am">午前</string>
+    <string name="pm">午後</string>
+
+    <string name="expo">説明</string>
+    <string name="kaitou">回答</string>
+
+    <string name="next_question" >次の問題</string>
+    <string name="befor_question">前の問題</string>
+    <string name="move" >移動</string>
+
+    <string name="question_num">問題番号</string>
+
+    <string name="defalt_ans_msg">☆　回答してください　☆</string>
+    <string name="crect_msg">○　正解です　○</string>
+
+    <string name="ans_erorr_msg">×　答が違います　×</string>
+    <string name="ans_num_erorr_msg">個選択してください</string>
+    <string name="return_meun">メニュー</string>
+    <string name="end">終了</string>
+    <string name="disp_ans">答表示</string>
+
+    <string name="big">文字(大)</string>
+    <string name="mini">文字(小)</string>
+    <string name="midole">文字(中)</string>
+
+    <string name="space">\n\n\n\n\n\n\n\n\n\n\n\n\n\n</string>
+
+    <string name="space_test">
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    </string>
+
+    <string name="space_test2">
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAAAAAAAAAAAAAAAAAAA
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBBBBBBBBBBBBBBBBBBB
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCCCCCCCCCCCCCCCCCCC
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDDDDDDDDDDDDDDDDDDD
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEE
+    </string>
+
+
 </resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    	
+	<style name="buttonSquare" >
+	    <item name="android:width">50dp</item>
+	    <item name="android:height">50dp</item>
+	</style>
+	
+	<style name="buttonRectangle" >
+	    <item name="android:width">70dp</item>
+	    <item name="android:height">50dp</item>
+
+	</style>
+	
+	<style name="buttonNumber" parent="buttonSquare">
+	    <item name="android:textSize">15sp</item>
+	    <item name="android:onClick">onClickNum</item>
+	</style>
+	<style name="buttonNumberDouble" parent="buttonNumber">
+	    <item name="android:width">100dp</item>
+	</style>
+	
+	
+	<style name="buttonDelet" parent="buttonSquare">
+	    <item name="android:textSize">12sp</item>
+	    <item name="android:onClick">onClickApEnd</item>
+	</style>
+	
+	
+	
+	
+	
+	
+	<style name="txt_style01">
+		<item name="android:textSize">20sp</item>
+		<item name="android:textColor">#EE0000</item>
+	</style>
+	<style name="txt_style02">
+		<item name="android:textSize">16sp</item>
+		<item name="android:textColor">#CCCCCC</item>
+		<item name="android:paddingLeft">20dp</item>
+	</style>
+	
+	<style name="txt_style03" parent="txt_style02">
+		<item name="android:paddingLeft">40dp</item>
+		<item name="android:background">#666699</item>
+	</style>
+	
+    
+</resources>

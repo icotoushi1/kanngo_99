@@ -13,8 +13,9 @@ import java.io.OutputStream;
 
 public class DataBaseHelper extends SQLiteOpenHelper {  
   
-    //The Android �̃f�t�H���g�ł̃f�[�^�x�[�X�p�X  
-    private static String DB_PATH = "/data/data/at_sys.pk.kanngo_kokushi/databases/";  
+    //The Android のデフォルトでのデータベースパス
+    private static String DB_PATH = "/data/data/click.nobiru.kanngo_99/databases/";
+    //private static String DB_PATH = "/assets/";
     private static String DB_NAME = "kanngo_kokushi.db";  
     private static String DB_NAME_ASSET = "kanngo_kokushi.db";  
    
@@ -29,21 +30,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }  
   
     /** 
-     * asset �Ɋi�[�����f�[�^�x�[�X���R�s�[���邽�߂̋�̃f�[�^�x�[�X���쐬���� 
+     * asset asset に格納したデータベースをコピーするための空のデータベースを作成する
      *  
      **/  
     public void createEmptyDataBase() throws IOException{  
         boolean dbExist = checkDataBaseExists();  
   
         if(dbExist){  
-            // ���łɃf�[�^�x�[�X�͍쐬����Ă���  
-        }else{  
-            // ���̃��\�b�h���ĂԂ��ƂŁA��̃f�[�^�x�[�X��  
-            // �A�v���̃f�t�H���g�V�X�e���p�X�ɍ����  
+            // すでにデータベースは作成されている
+        }else{
+            // このメソッドを呼ぶことで、空のデータベースが
+            // アプリのデフォルトシステムパスに作られる
             this.getReadableDatabase();  
    
             try {  
-                // asset �Ɋi�[�����f�[�^�x�[�X���R�s�[����  
+                // asset asset に格納したデータベースをコピーする
                 copyDataBaseFromAsset();   
             } catch (IOException e) {  
                 throw new Error("Error copying database");  
@@ -52,9 +53,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }   
       
     /** 
-     * �ăR�s�[��h�~���邽�߂ɁA���łɃf�[�^�x�[�X�����邩�ǂ������肷�� 
-     *  
-     * @return ���݂��Ă���ꍇ {@code true} 
+     * 再コピーを防止するために、すでにデータベースがあるかどうか判定する
+     *      *
+     *      * @return 存在している場合 {@code true}
      */  
     private boolean checkDataBaseExists() {  
         SQLiteDatabase checkDb = null;  
@@ -62,31 +63,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try{  
             String dbPath = DB_PATH + DB_NAME;  
             checkDb = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);  
-        }catch(SQLiteException e){  
-            // �f�[�^�x�[�X�͂܂����݂��Ă��Ȃ�  
+        }catch(SQLiteException e){
+            // データベースはまだ存在していない
+            e.printStackTrace();
         }  
    
         if(checkDb != null){  
             checkDb.close();  
         }  
         return checkDb != null ? true : false;  
-    }      
-   
-    /** 
-     * asset �Ɋi�[�����f�[���x�[�X���f�t�H���g�� 
-     * �f�[�^�x�[�X�p�X�ɍ쐬��������̃f�[�^�x�[�X�ɃR�s�[���� 
+    }
+
+    /**
+     * asset に格納したデーだベースをデフォルトの
+     * データベースパスに作成したからのデータベースにコピーする
      * */  
-    private void copyDataBaseFromAsset() throws IOException{  
-   
-        // asset ���̃f�[�^�x�[�X�t�@�C���ɃA�N�Z�X  
-        InputStream mInput = mContext.getAssets().open(DB_NAME_ASSET);  
-   
-        // �f�t�H���g�̃f�[�^�x�[�X�p�X�ɍ쐬�������DB  
+    private void copyDataBaseFromAsset() throws IOException{
+
+        // asset 内のデータベースファイルにアクセス
+        InputStream mInput = mContext.getAssets().open(DB_NAME_ASSET);
+
+        // デフォルトのデータベースパスに作成した空のDB
         String outFileName = DB_PATH + DB_NAME;  
    
-        OutputStream mOutput = new FileOutputStream(outFileName);  
-  
-        // �R�s�[  
+        OutputStream mOutput = new FileOutputStream(outFileName);
+
+        // コピー
         byte[] buffer = new byte[1024];  
         int size;  
         while ((size = mInput.read(buffer)) > 0){  

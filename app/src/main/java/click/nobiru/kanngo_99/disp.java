@@ -32,7 +32,7 @@ public class disp extends Activity{
     int editTextWidth=0;
     int editTextHeight=0;
     int buttonWidth=0;
-	int buttonHeight=0;//�f�B�X�v���C�̉�������Ƀ{�^���̍������擾����
+	int buttonHeight=0;//ディスプレイの横幅を基準にボタンの高さを取得する
 	int padding=0;
     
     int textSize=0;
